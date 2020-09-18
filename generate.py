@@ -1,8 +1,8 @@
 import os
 
-proyect_dir = None
+proyect_dir = '/home/jse/Escritorio/intech-node'
 
-generator_dir = os.path.dirname(os.path.abspath(__file__)) + '/GraphModels'
+generator_dir = os.path.dirname(os.path.abspath(__file__))
 
 apps = ""
 
@@ -17,17 +17,16 @@ def isAnApp(app):
 if __name__ == "__main__":
 
     print('Introduce el directorio completo del projecto: ')
-    proyect_dir = input()
+    input = input()
+    if input is not None and input is not '': proyect_dir = input 
 
-    with open(generator_dir+'apps_settings.py', 'w') as f:
+    with open(generator_dir+'/GraphModels/apps_settings.py', 'w') as f:
         f.write('from GraphModels.settings import *' + os.linesep)
         [appendApp(app=app) for app in os.listdir(proyect_dir) if isAnApp(app=app)]
         f.write('INSTALLLED_APPS += ['+apps+']')
 
-    os.system('cp '+proyect_dir+'/requirements.txt '+generator_dir+'/')
+    os.system('cp '+proyect_dir+'/requirements.txt '+generator_dir+'/GraphModels/')
 
-    os.system('source /home/jse/Escritorio/GraphModelsGenerator/venv/bin/activate && \
-        pip3 -r install GraphModels/requirements.txt && \
-        python3 ' + generator_dir + ' /manage.py graph_models --settings=apps_settings -a -o /home/jse/Escritorio/node.png')
+    os.system(generator_dir+'/_generate.sh '+generator_dir+' '+proyect_dir)
 
-    #clean
+   # clean()
