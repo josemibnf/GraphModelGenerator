@@ -27,4 +27,5 @@ if __name__ == "__main__":
     os.system('cp '+proyect_dir+'/requirements.txt '+generator_dir+'/GraphModels/')
     os.system(generator_dir+'/_generate.sh '+generator_dir+' '+proyect_dir)
 
-   # clean()
+    os.system('git fetch origin')
+    os.system('git reset --hard origin/master')
